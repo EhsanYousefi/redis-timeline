@@ -19,5 +19,11 @@ module Timeline
     def get_list(options={})
       Timeline.redis.lrange options[:list_name], options[:start], options[:end]
     end
+
+    def remove_list(options={})
+      unless options.nil?
+        Timeline.redis.ltrim options[:list_name], options[:start], options[:end]
+      end
+    end
   end
 end
